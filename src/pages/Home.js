@@ -1,4 +1,7 @@
 import React from 'react';
+import Header from '../components/sections/Header';
+import Footer from '../components/sections/Footer';
+
 import plant from '../images/plant.jpg';
 import SingleProduct from '../components/ui/SingleProduct';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
@@ -16,22 +19,6 @@ import {
   SimpleGrid,
   Container,
 } from '@chakra-ui/react';
-
-function Navigation() {
-  return (
-    <Flex justify="space-between" bg="black" p={4}>
-      <Box py={4} textAlign="left" w="200px" color="white">
-        <Text fontSize={32}>General Store</Text>
-      </Box>
-      <Center color="white" justify="flex-end">
-        <Link p={4}>Our Story</Link>
-        <Link p={4}>Contact</Link>
-        <Link p={4}>FAQs</Link>
-        <Button bg="purple">My Cart</Button>
-      </Center>
-    </Flex>
-  );
-}
 
 function Hero() {
   return (
@@ -85,29 +72,10 @@ function ProductArea() {
   );
 }
 
-function Footer() {
-  return (
-    <Flex justify="space-between" bg="black" p={4}>
-      <Box py={4} textAlign="left" w="200px" color="white">
-        <Text fontSize={20}>General Store</Text>
-      </Box>
-      <Center color="white" justify="flex-end">
-        <Text color="white">Follow Us</Text>
-        <Button m={2} ml={10} colorScheme="facebook" leftIcon={<FaFacebook />}>
-          Facebook
-        </Button>
-        <Button m={2} colorScheme="twitter" leftIcon={<FaTwitter />}>
-          Twitter
-        </Button>
-      </Center>
-    </Flex>
-  );
-}
-
 function Home() {
   return (
     <div>
-      <Navigation />
+      <Header />
       <Hero />
       <ProductArea />
       <Footer />

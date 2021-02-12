@@ -17,7 +17,13 @@ function SingleProduct(props) {
       transition="all .5s ease"
     >
       <Box overflow="hidden" h="200px">
-        <Badge position="absolute" borderRadius="full" px="2" colorScheme="red">
+        <Badge
+          display="block"
+          position="absolute"
+          borderRadius="full"
+          px="2"
+          colorScheme="red"
+        >
           New
         </Badge>
         <Image src={plant}></Image>
@@ -27,7 +33,9 @@ function SingleProduct(props) {
           <Text fontWeight="bold" mt={1}>
             Paper Box
           </Text>
-          <Text fontStyle="italic">Jet Black</Text>
+          <Text ml={-3} fontStyle="italic">
+            Jet Black
+          </Text>
         </Box>
         <Box>
           <Text>$30</Text>
