@@ -13,11 +13,14 @@ function Navigation() {
       </Box>
       <Center color="white" justify="flex-end">
         <Link as={RouterLink} p={4} to="/product">
-          Our Story
+          Shop All
         </Link>
+        <Link p={4}>Our Story</Link>
         <Link p={4}>Contact</Link>
         <Link p={4}>FAQs</Link>
-        <Button bg="purple">My Cart</Button>
+        <Button as={RouterLink} to="/checkout" bg="purple">
+          My Cart
+        </Button>
       </Center>
     </Flex>
   );

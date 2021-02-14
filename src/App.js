@@ -1,6 +1,7 @@
 import React from 'react';
 import Home from './pages/Home';
 import ProductPage from './pages/ProductPage';
+import Checkout from './pages/Checkout';
 import { BrowserRouter, Switch, Route, Link, Router } from 'react-router-dom';
 
 function App() {
@@ -9,6 +10,9 @@ function App() {
       <Switch>
         <Route path="/product">
           <ProductPage />
+        </Route>
+        <Route path="/checkout">
+          <Checkout />
         </Route>
         <Route path="/">
           <Home />
