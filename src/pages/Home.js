@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../components/sections/Header';
 import Footer from '../components/sections/Footer';
 
-import plant from '../images/plant.jpg';
+import hero2 from '../images/hero2.jpg';
 import SingleProduct from '../components/ui/SingleProduct';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import { FaFacebook, FaTwitter } from 'react-icons/fa';
@@ -24,7 +24,7 @@ function Hero() {
   return (
     <Center>
       <Square
-        backgroundImage={'url(' + plant + ')'}
+        backgroundImage={'url(' + hero2 + ')'}
         w="100%"
         h="400px"
         bgPosition="center"
@@ -34,7 +34,7 @@ function Hero() {
         bgSize="cover"
       >
         <Heading size="4xl" color="white">
-          We have great prices, I think.
+          Work from home in style
         </Heading>
       </Square>
     </Center>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Image, Badge, Text, Flex } from '@chakra-ui/react';
-import plant from '../../images/plant.jpg';
+
+import shoe from '../../images/shoe.jpg';
 
 function SingleProduct(props) {
   return (
@@ -26,7 +27,7 @@ function SingleProduct(props) {
         >
           New
         </Badge>
-        <Image src={plant}></Image>
+        <Image src={shoe}></Image>
       </Box>
       <Flex alignItems="baseline" justify="space-between">
         <Box>

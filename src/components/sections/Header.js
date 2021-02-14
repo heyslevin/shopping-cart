@@ -8,7 +8,7 @@ function Navigation() {
     <Flex justify="space-between" bg="black" p={4}>
       <Box py={4} textAlign="left" w="200px" color="white">
         <Link as={RouterLink} to="/" fontSize={32}>
-          General Store
+          Albino
         </Link>
       </Box>
       <Center color="white" justify="flex-end">

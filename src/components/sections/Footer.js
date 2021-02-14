@@ -6,7 +6,7 @@ function Footer() {
   return (
     <Flex justify="space-between" bg="black" p={4}>
       <Box py={4} textAlign="left" w="200px" color="white">
-        <Text fontSize={20}>General Store</Text>
+        <Text fontSize={20}>Albino</Text>
       </Box>
       <Center color="white" justify="flex-end">
         <Text color="white">Follow Us</Text>
