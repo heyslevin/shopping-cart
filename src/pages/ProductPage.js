@@ -19,6 +19,12 @@ import {
   Stack,
   UnorderedList,
   ListItem,
+  Spacer,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
 } from '@chakra-ui/react';
 
 function ProductInfo() {
@@ -27,7 +33,7 @@ function ProductInfo() {
       {/* Size of Container */}
       <Flex h={700} bg="red">
         {/* Product Image */}
-        <Flex bg="blue" overflow="hidden" flex="2" overflow="hidden">
+        <Flex bg="gray.100" overflow="hidden" flex="2" overflow="hidden">
           <Image src={shoe} minWidth="100%" fit="cover" />
         </Flex>
 
@@ -81,10 +87,18 @@ function ProductInfo() {
               <ListItem>Calms inflammation </ListItem>
               <ListItem>Reduces irritation </ListItem>
             </UnorderedList>
-
-            <Button colorScheme="blackAlpha" bg="black">
-              $69 · Buy Now
-            </Button>
+            <Flex justify="space-between">
+              <NumberInput defaultValue="1">
+                <NumberInputField />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
+              <Button ml={1} w="100%" colorScheme="blackAlpha" bg="black">
+                $69 · Add to Cart
+              </Button>
+            </Flex>
           </Stack>
         </Stack>
       </Flex>

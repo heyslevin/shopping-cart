@@ -1,12 +1,14 @@
 import React from 'react';
 import { Box, Image, Badge, Text, Flex } from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
 
 import shoe from '../../images/shoe.jpg';
 
 function SingleProduct(props) {
   return (
     <Box
-      as="button"
+      as={RouterLink}
+      to="/product"
       m={2}
       p={5}
       w="300px"
@@ -34,9 +36,7 @@ function SingleProduct(props) {
           <Text fontWeight="bold" mt={1}>
             Paper Box
           </Text>
-          <Text ml={-3} fontStyle="italic">
-            Jet Black
-          </Text>
+          <Text fontStyle="italic">Jet Black</Text>
         </Box>
         <Box>
           <Text>$30</Text>

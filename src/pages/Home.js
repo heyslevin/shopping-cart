@@ -22,22 +22,19 @@ import {
 
 function Hero() {
   return (
-    <Center>
-      <Square
-        backgroundImage={'url(' + hero2 + ')'}
-        w="100%"
-        h="400px"
-        bgPosition="center"
-        bgRepeat="no-repeat"
-        bgPosition="center"
-        bgRepeat="no-repeat"
-        bgSize="cover"
+    <Flex h={500} justifyContent="center" overflow="hidden" position="relative">
+      <Heading
+        size="4xl"
+        color="white"
+        position="absolute"
+        alignSelf="center"
+        zIndex="1"
       >
-        <Heading size="4xl" color="white">
-          Work from home in style
-        </Heading>
-      </Square>
-    </Center>
+        Work from home in style
+      </Heading>
+      <Flex w="100%" h="100%" bg="black" position="absolute" opacity=".4" />
+      <Image minWidth="100%" fit="cover" src={hero2} />
+    </Flex>
   );
 }
 

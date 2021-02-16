@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../components/sections/Header';
 import Footer from '../components/sections/Footer';
-import CheckoutItem from '../components/ui/CheckoutItem';
+import CheckoutTable from '../components/sections/CheckoutTable.js';
 
 import {
   Box,
@@ -25,8 +25,10 @@ function Checkout() {
     <div>
       <Header />
       <Container maxWidth="1200px">
-        <Heading size="xl">Checkout Page</Heading>
-        <CheckoutItem />
+        <Heading size="xl" pt={10}>
+          My Shopping Cart
+        </Heading>
+        <CheckoutTable />
       </Container>
       <Footer />
     </div>
