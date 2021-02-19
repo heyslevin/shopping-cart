@@ -48,7 +48,7 @@ function ProductArea(props) {
         borderBottom="1px solid black"
         py={3}
       >
-        <Heading size="lg">Our Best Sellers</Heading>
+        <Heading size="lg">All Products</Heading>
         <Button
           rightIcon={<ArrowForwardIcon />}
           colorScheme="black"
@@ -87,11 +87,10 @@ function ProductArea(props) {
   );
 }
 
-function Home(props) {
+function AllProducts(props) {
   return (
     <div>
       <Header />
-      <Hero />
       <ProductArea
         data={props.data}
         setCurrentProduct={props.setCurrentProduct}
@@ -101,4 +100,4 @@ function Home(props) {
   );
 }
 
-export default Home;
+export default AllProducts;

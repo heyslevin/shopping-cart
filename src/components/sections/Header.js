@@ -24,7 +24,7 @@ function Navigation() {
         </Link>
       </Box>
       <Center color="black" justify="flex-end">
-        <Link as={RouterLink} p={4} to="/product">
+        <Link as={RouterLink} p={4} to="/shopAll">
           Shop All
         </Link>
         <Link p={4}>Our Story</Link>

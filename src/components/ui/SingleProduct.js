@@ -5,10 +5,20 @@ import { Link as RouterLink } from 'react-router-dom';
 import shoe from '../../images/shoe.jpg';
 
 function SingleProduct(props) {
+  const {
+    name,
+    color,
+    price,
+    quantity,
+    description,
+    features,
+    image,
+  } = props.data;
   return (
     <Box
       as={RouterLink}
       to="/product"
+      onClick={() => props.setCurrentProduct(props.data)}
       m={2}
       p={5}
       w="300px"
@@ -29,17 +39,16 @@ function SingleProduct(props) {
         >
           New
         </Badge>
-        <Image src={shoe}></Image>
+        <Image src={image}></Image>
       </Box>
       <Flex alignItems="baseline" justify="space-between">
         <Box>
-          <Text fontWeight="bold" mt={1}>
-            Paper Box
-          </Text>
-          <Text fontStyle="italic">Jet Black</Text>
+          <Text fontWeight="bold" mt={1}></Text>
+          <p>{name}</p>
+          <Text fontStyle="italic">{color}</Text>
         </Box>
         <Box>
-          <Text>$30</Text>
+          <Text>${price}</Text>
         </Box>
       </Flex>
     </Box>
