@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../components/sections/Header';
 import Footer from '../components/sections/Footer';
 
@@ -45,6 +45,8 @@ function ProductInfo(props) {
     features,
     image,
   } = props.currentProduct;
+
+  const [inputQuantity, setInputQuantity] = useState(1);
 
   return (
     <Container maxWidth="1200px">
@@ -96,14 +98,25 @@ function ProductInfo(props) {
               <FeaturesList features={features} />
             </UnorderedList>
             <Flex justify="space-between">
-              <NumberInput defaultValue="1">
+              <NumberInput
+                defaultValue={1}
+                onChange={value => setInputQuantity(value)}
+              >
                 <NumberInputField />
                 <NumberInputStepper>
                   <NumberIncrementStepper />
                   <NumberDecrementStepper />
                 </NumberInputStepper>
               </NumberInput>
-              <Button ml={1} w="100%" colorScheme="blackAlpha" bg="black">
+              <Button
+                onClick={() =>
+                  props.handleAddToCart(props.currentProduct, inputQuantity)
+                }
+                ml={1}
+                w="100%"
+                colorScheme="blackAlpha"
+                bg="black"
+              >
                 ${price} · Add to Cart
               </Button>
             </Flex>
@@ -117,9 +130,10 @@ function ProductInfo(props) {
 function ProductPage(props) {
   return (
     <div>
-      <Header />
-      <ProductInfo currentProduct={props.currentProduct} />
-      <Footer />
+      <ProductInfo
+        handleAddToCart={props.handleAddToCart}
+        currentProduct={props.currentProduct}
+      />
     </div>
   );
 }

@@ -19,7 +19,7 @@ function Navigation() {
   return (
     <Flex justify="space-between" bg="white" p={4}>
       <Box py={4} textAlign="left" w="200px" color="white">
-        <Link as={RouterLink} to="/" fontSize={32}>
+        <Link _focus={{ outline: 'none' }} as={RouterLink} to="/" fontSize={32}>
           <Image src={logo} />
         </Link>
       </Box>

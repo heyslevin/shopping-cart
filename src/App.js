@@ -3,20 +3,41 @@ import Home from './pages/Home';
 import ProductPage from './pages/ProductPage';
 import Checkout from './pages/Checkout';
 import AllProducts from './pages/AllProducts';
+import Header from './components/sections/Header';
+import Footer from './components/sections/Footer';
+
 import { BrowserRouter, Switch, Route, Link, Router } from 'react-router-dom';
 import data from './data/data.js';
 
 function App() {
   const [currentProduct, setCurrentProduct] = useState(data[0]);
+  const [cart, setCart] = useState([]);
+
+  function handleAddToCart(product, quantity) {
+    let updatedProduct = product;
+    updatedProduct.quantity = parseInt(quantity);
+
+    if (cart.includes(product)) {
+      let cartWithoutProduct = cart.filter(item => item !== product);
+      setCart([...cartWithoutProduct, updatedProduct]);
+    } else {
+      setCart([...cart, updatedProduct]);
+    }
+  }
 
   return (
     <BrowserRouter>
+      <Header />
+
       <Switch>
         <Route path="/product">
-          <ProductPage currentProduct={currentProduct} />
+          <ProductPage
+            handleAddToCart={handleAddToCart}
+            currentProduct={currentProduct}
+          />
         </Route>
         <Route path="/checkout">
-          <Checkout />
+          <Checkout setCart={setCart} cart={cart} />
         </Route>
         <Route path="/shopAll">
           <AllProducts setCurrentProduct={setCurrentProduct} data={data} />
@@ -25,6 +46,7 @@ function App() {
           <Home setCurrentProduct={setCurrentProduct} data={data} />
         </Route>
       </Switch>
+      <Footer />
     </BrowserRouter>
   );
 }

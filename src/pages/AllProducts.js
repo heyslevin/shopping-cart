@@ -49,13 +49,6 @@ function ProductArea(props) {
         py={3}
       >
         <Heading size="lg">All Products</Heading>
-        <Button
-          rightIcon={<ArrowForwardIcon />}
-          colorScheme="black"
-          variant="outline"
-        >
-          View All
-        </Button>
       </Flex>
       <Flex pt={8} maxW="950px" wrap="wrap" justifyContent="center">
         <SingleProduct
@@ -90,12 +83,10 @@ function ProductArea(props) {
 function AllProducts(props) {
   return (
     <div>
-      <Header />
       <ProductArea
         data={props.data}
         setCurrentProduct={props.setCurrentProduct}
       />
-      <Footer />
     </div>
   );
 }

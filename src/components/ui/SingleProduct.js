@@ -2,7 +2,23 @@ import React from 'react';
 import { Box, Image, Badge, Text, Flex } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 
-import shoe from '../../images/shoe.jpg';
+function NewBadge(props) {
+  if (props.isNew) {
+    return (
+      <Badge
+        display="block"
+        position="absolute"
+        borderRadius="full"
+        px="2"
+        colorScheme="red"
+      >
+        New
+      </Badge>
+    );
+  } else {
+    return null;
+  }
+}
 
 function SingleProduct(props) {
   const {
@@ -13,7 +29,9 @@ function SingleProduct(props) {
     description,
     features,
     image,
+    isNew,
   } = props.data;
+
   return (
     <Box
       as={RouterLink}
@@ -30,15 +48,7 @@ function SingleProduct(props) {
       transition="all .5s ease"
     >
       <Box overflow="hidden" h="200px">
-        <Badge
-          display="block"
-          position="absolute"
-          borderRadius="full"
-          px="2"
-          colorScheme="red"
-        >
-          New
-        </Badge>
+        <NewBadge isNew={isNew} />
         <Image src={image}></Image>
       </Box>
       <Flex alignItems="baseline" justify="space-between">

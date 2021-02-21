@@ -2,6 +2,8 @@ import React from 'react';
 import Header from '../components/sections/Header';
 import Footer from '../components/sections/Footer';
 
+import { Link as RouterLink } from 'react-router-dom';
+
 import hero2 from '../images/hero2.jpg';
 import SingleProduct from '../components/ui/SingleProduct';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
@@ -50,6 +52,8 @@ function ProductArea(props) {
       >
         <Heading size="lg">Our Best Sellers</Heading>
         <Button
+          as={RouterLink}
+          to="/shopAll"
           rightIcon={<ArrowForwardIcon />}
           colorScheme="black"
           variant="outline"
@@ -90,13 +94,11 @@ function ProductArea(props) {
 function Home(props) {
   return (
     <div>
-      <Header />
       <Hero />
       <ProductArea
         data={props.data}
         setCurrentProduct={props.setCurrentProduct}
       />
-      <Footer />
     </div>
   );
 }
