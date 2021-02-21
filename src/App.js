@@ -27,7 +27,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header />
+      <Header cart={cart} />
 
       <Switch>
         <Route path="/product">

@@ -15,7 +15,15 @@ import {
   Image,
 } from '@chakra-ui/react';
 
-function Navigation() {
+function Navigation(props) {
+  //Calculate Total
+  let quantityArray = props.cart.map(item => item.quantity);
+  let totalInCart = 0;
+
+  if (quantityArray.length !== 0) {
+    totalInCart = quantityArray.reduce((acc, current) => acc + current);
+  }
+
   return (
     <Flex justify="space-between" bg="white" p={4}>
       <Box py={4} textAlign="left" w="200px" color="white">
@@ -42,7 +50,7 @@ function Navigation() {
           }}
         >
           <Icon as={BiCart} color="white" w={5} h={5} mr={3} />
-          <Badge>1</Badge>
+          <Badge>{totalInCart}</Badge>
         </Button>
       </Center>
     </Flex>
