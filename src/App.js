@@ -13,6 +13,14 @@ function App() {
   const [currentProduct, setCurrentProduct] = useState(data[0]);
   const [cart, setCart] = useState([]);
 
+  function handleDeleteProduct(product) {
+    let updatedCart = [...cart];
+    if (updatedCart.includes(product)) {
+      let cartWithoutProduct = updatedCart.filter(item => item !== product);
+      setCart(cartWithoutProduct);
+    }
+  }
+
   function handleAddToCart(product, quantity) {
     let updatedProduct = product;
     updatedProduct.quantity = parseInt(quantity);
@@ -53,6 +61,7 @@ function App() {
             setCart={setCart}
             cart={cart}
             handleAddToCart={handleAddToCart}
+            handleDeleteProduct={handleDeleteProduct}
           />
         </Route>
         <Route path="/shopAll">

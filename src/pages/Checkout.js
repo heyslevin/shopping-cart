@@ -27,6 +27,7 @@ function Checkout(props) {
         </Heading>
         <CheckoutTable
           handleAddToCart={props.handleAddToCart}
+          handleDeleteProduct={props.handleDeleteProduct}
           cart={props.cart}
           setCart={props.setCart}
         />

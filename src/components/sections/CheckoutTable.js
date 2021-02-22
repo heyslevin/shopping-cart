@@ -10,12 +10,14 @@ import {
   Center,
   Link,
   Text,
+  Spacer,
   Square,
   Heading,
   Image,
   SimpleGrid,
   Container,
   Stack,
+  HStack,
   UnorderedList,
   ListItem,
   GridItem,
@@ -56,10 +58,10 @@ function HeaderCheckout(props) {
 }
 
 function ProductTable(props) {
-  const { cart } = props;
+  const { cart, handleDeleteProduct, handleAddToCart } = props;
 
   function updateQuantity(quantity, index) {
-    props.handleAddToCart(props.cart[index], quantity);
+    handleAddToCart(props.cart[index], quantity);
   }
 
   let rows;
@@ -69,6 +71,7 @@ function ProductTable(props) {
       return (
         <ProductRow
           updateQuantity={updateQuantity}
+          handleDeleteProduct={handleDeleteProduct}
           cart={cart}
           product={product}
           key={index}
@@ -95,6 +98,8 @@ function ProductRow(props) {
     features,
     image,
   } = props.product;
+
+  const { handleDeleteProduct } = props;
 
   return (
     <Flex w="100%" py={5} borderBottom="1px" borderColor="gray.300">
@@ -129,6 +134,7 @@ function ProductRow(props) {
         <Center>
           <Center
             as="button"
+            onClick={() => handleDeleteProduct(props.product)}
             _hover={{ background: 'gray.300', color: 'gray.500' }}
             w="40px"
             h="40px"
@@ -146,16 +152,49 @@ function ProductRow(props) {
   );
 }
 
-function CheckoutItem(props) {
+function CheckoutTotal(props) {
+  let prices = props.cart.map(product => product.price * product.quantity);
+  let total = prices.reduce((acc, cur) => acc + cur);
+
+  return (
+    <Flex
+      mt={2}
+      pt={3}
+      pb={10}
+      borderBottom="1px"
+      borderColor="gray.300"
+      w="100%"
+      justify="space-between"
+    >
+      <Spacer flex="3" />
+      <Flex flex="2" align="center">
+        <Text>Total</Text>
+      </Flex>
+
+      <Flex flex="1" align="center">
+        <HStack>
+          <Flex alignItems="baseline">
+            <Text fontSize="4xl">${total}</Text>
+            <Text pl={2}>USD</Text>
+          </Flex>
+        </HStack>
+      </Flex>
+    </Flex>
+  );
+}
+
+function CheckoutTable(props) {
   return (
     <div>
       <HeaderCheckout cart={props.cart} />
       <ProductTable
         handleAddToCart={props.handleAddToCart}
+        handleDeleteProduct={props.handleDeleteProduct}
         cart={props.cart}
       ></ProductTable>
+      <CheckoutTotal cart={props.cart} />
     </div>
   );
 }
 
-export default CheckoutItem;
+export default CheckoutTable;
