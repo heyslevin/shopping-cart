@@ -24,41 +24,66 @@ import {
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
+  useProps,
 } from '@chakra-ui/react';
 
-function HeaderCheckout() {
-  return (
-    <Flex
-      mt={2}
-      py={3}
-      borderBottom="1px"
-      borderColor="gray.300"
-      w="100%"
-      justify="space-between"
-    >
-      <Flex flex="3">Description</Flex>
+function HeaderCheckout(props) {
+  if (props.cart.length !== 0) {
+    return (
+      <Flex
+        mt={2}
+        py={3}
+        borderBottom="1px"
+        borderColor="gray.300"
+        w="100%"
+        justify="space-between"
+      >
+        <Flex flex="3">Description</Flex>
 
-      <Flex flex="2" align="center">
-        <Center>
-          <Text>Quantity</Text>
-        </Center>
+        <Flex flex="2" align="center">
+          <Center>
+            <Text>Quantity</Text>
+          </Center>
+        </Flex>
+        <Flex flex="1" align="center">
+          <Text>Price</Text>
+        </Flex>
       </Flex>
-      <Flex flex="1" align="center">
-        <Text>Price</Text>
-      </Flex>
-    </Flex>
-  );
+    );
+  } else {
+    return <Heading>is currently empty.</Heading>;
+  }
 }
 
 function ProductTable(props) {
+  const { cart } = props;
+  let rows;
+
+  if (cart.length > 0) {
+    rows = cart.map((product, index) => {
+      console.log(product);
+      return <ProductRow product={product} key={index} />;
+    });
+  }
+
   return (
     <Stack mb={10} w="100%" justify="space-between">
-      {props.children}
+      {rows}
     </Stack>
   );
 }
 
-function ProductRow() {
+function ProductRow(props) {
+  const {
+    name,
+    color,
+    price,
+    quantity,
+    description,
+    features,
+    image,
+  } = props.product;
+
   return (
     <Flex w="100%" py={5} borderBottom="1px" borderColor="gray.300">
       <Flex flex="3">
@@ -68,16 +93,16 @@ function ProductRow() {
           overflow="hidden"
           borderColor="gray.400"
         >
-          <Image boxSize="100px" src={shoe}></Image>
+          <Image boxSize="100px" src={image}></Image>
         </Box>
         <Stack pl={3} justify="center">
-          <Text>The Shoe</Text>
-          <Text color="gray.500">Medium</Text>
+          <Text>{name}</Text>
+          <Text color="gray.500">{color}</Text>
         </Stack>
       </Flex>
 
       <Flex flex="1" align="center">
-        <NumberInput defaultValue="1">
+        <NumberInput defaultValue={quantity}>
           <NumberInputField />
           <NumberInputStepper>
             <NumberIncrementStepper />
@@ -100,22 +125,17 @@ function ProductRow() {
         </Center>
       </Flex>
       <Flex flex="1" align="center">
-        <Text>$59</Text>
+        <Text>${price}</Text>
       </Flex>
     </Flex>
   );
 }
 
-function CheckoutItem() {
+function CheckoutItem(props) {
   return (
     <div>
-      <HeaderCheckout />
-      <ProductTable>
-        <ProductRow />
-        <ProductRow />
-        <ProductRow />
-        <ProductRow />
-      </ProductTable>
+      <HeaderCheckout cart={props.cart} />
+      <ProductTable cart={props.cart}></ProductTable>
     </div>
   );
 }

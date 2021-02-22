@@ -18,14 +18,14 @@ import {
   ListItem,
 } from '@chakra-ui/react';
 
-function Checkout() {
+function Checkout(props) {
   return (
     <div>
       <Container maxWidth="1200px">
         <Heading size="xl" pt={10}>
           My Shopping Cart
         </Heading>
-        <CheckoutTable />
+        <CheckoutTable cart={props.cart} setCart={props.setCart} />
       </Container>
     </div>
   );
