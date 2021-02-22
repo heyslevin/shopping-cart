@@ -16,13 +16,25 @@ function App() {
   function handleAddToCart(product, quantity) {
     let updatedProduct = product;
     updatedProduct.quantity = parseInt(quantity);
+    let updatedCart = [...cart];
 
     if (cart.includes(product)) {
-      let cartWithoutProduct = cart.filter(item => item !== product);
-      setCart([...cartWithoutProduct, updatedProduct]);
+      let index = updatedCart.indexOf(product);
+      updatedCart[index] = updatedProduct;
+      setCart(updatedCart);
     } else {
       setCart([...cart, updatedProduct]);
     }
+
+    // let updatedProduct = product;
+    // updatedProduct.quantity = parseInt(quantity);
+
+    // if (cart.includes(product)) {
+    //   let cartWithoutProduct = cart.filter(item => item !== product);
+    //   setCart([...cartWithoutProduct, updatedProduct]);
+    // } else {
+    //   setCart([...cart, updatedProduct]);
+    // }
   }
 
   return (
@@ -37,7 +49,11 @@ function App() {
           />
         </Route>
         <Route path="/checkout">
-          <Checkout setCart={setCart} cart={cart} />
+          <Checkout
+            setCart={setCart}
+            cart={cart}
+            handleAddToCart={handleAddToCart}
+          />
         </Route>
         <Route path="/shopAll">
           <AllProducts setCurrentProduct={setCurrentProduct} data={data} />

@@ -57,12 +57,24 @@ function HeaderCheckout(props) {
 
 function ProductTable(props) {
   const { cart } = props;
+
+  function updateQuantity(quantity, index) {
+    props.handleAddToCart(props.cart[index], quantity);
+  }
+
   let rows;
 
   if (cart.length > 0) {
     rows = cart.map((product, index) => {
-      console.log(product);
-      return <ProductRow product={product} key={index} />;
+      return (
+        <ProductRow
+          updateQuantity={updateQuantity}
+          cart={cart}
+          product={product}
+          key={index}
+          index={index}
+        />
+      );
     });
   }
 
@@ -102,7 +114,10 @@ function ProductRow(props) {
       </Flex>
 
       <Flex flex="1" align="center">
-        <NumberInput defaultValue={quantity}>
+        <NumberInput
+          defaultValue={quantity}
+          onChange={quantity => props.updateQuantity(quantity, props.index)}
+        >
           <NumberInputField />
           <NumberInputStepper>
             <NumberIncrementStepper />
@@ -135,7 +150,10 @@ function CheckoutItem(props) {
   return (
     <div>
       <HeaderCheckout cart={props.cart} />
-      <ProductTable cart={props.cart}></ProductTable>
+      <ProductTable
+        handleAddToCart={props.handleAddToCart}
+        cart={props.cart}
+      ></ProductTable>
     </div>
   );
 }

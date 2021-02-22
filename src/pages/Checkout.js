@@ -25,7 +25,11 @@ function Checkout(props) {
         <Heading size="xl" pt={10}>
           My Shopping Cart
         </Heading>
-        <CheckoutTable cart={props.cart} setCart={props.setCart} />
+        <CheckoutTable
+          handleAddToCart={props.handleAddToCart}
+          cart={props.cart}
+          setCart={props.setCart}
+        />
       </Container>
     </div>
   );
