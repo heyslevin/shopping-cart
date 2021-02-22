@@ -1,6 +1,4 @@
 import React from 'react';
-import Header from '../components/sections/Header';
-import Footer from '../components/sections/Footer';
 import CheckoutTable from '../components/sections/CheckoutTable.js';
 
 import {
@@ -20,17 +18,20 @@ import {
   ListItem,
 } from '@chakra-ui/react';
 
-function Checkout() {
+function Checkout(props) {
   return (
     <div>
-      <Header />
       <Container maxWidth="1200px">
         <Heading size="xl" pt={10}>
           My Shopping Cart
         </Heading>
-        <CheckoutTable />
+        <CheckoutTable
+          handleAddToCart={props.handleAddToCart}
+          handleDeleteProduct={props.handleDeleteProduct}
+          cart={props.cart}
+          setCart={props.setCart}
+        />
       </Container>
-      <Footer />
     </div>
   );
 }

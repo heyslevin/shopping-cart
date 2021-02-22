@@ -10,12 +10,14 @@ import {
   Center,
   Link,
   Text,
+  Spacer,
   Square,
   Heading,
   Image,
   SimpleGrid,
   Container,
   Stack,
+  HStack,
   UnorderedList,
   ListItem,
   GridItem,
@@ -24,41 +26,81 @@ import {
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
+  useProps,
 } from '@chakra-ui/react';
 
-function HeaderCheckout() {
-  return (
-    <Flex
-      mt={2}
-      py={3}
-      borderBottom="1px"
-      borderColor="gray.300"
-      w="100%"
-      justify="space-between"
-    >
-      <Flex flex="3">Description</Flex>
+function HeaderCheckout(props) {
+  if (props.cart.length !== 0) {
+    return (
+      <Flex
+        mt={2}
+        py={3}
+        borderBottom="1px"
+        borderColor="gray.300"
+        w="100%"
+        justify="space-between"
+      >
+        <Flex flex="3">Description</Flex>
 
-      <Flex flex="2" align="center">
-        <Center>
-          <Text>Quantity</Text>
-        </Center>
+        <Flex flex="2" align="center">
+          <Center>
+            <Text>Quantity</Text>
+          </Center>
+        </Flex>
+        <Flex flex="1" align="center">
+          <Text>Price</Text>
+        </Flex>
       </Flex>
-      <Flex flex="1" align="center">
-        <Text>Price</Text>
-      </Flex>
-    </Flex>
-  );
+    );
+  } else {
+    return <Heading>is currently empty.</Heading>;
+  }
 }
 
 function ProductTable(props) {
+  const { cart, handleDeleteProduct, handleAddToCart } = props;
+
+  function updateQuantity(quantity, index) {
+    handleAddToCart(props.cart[index], quantity);
+  }
+
+  let rows;
+
+  if (cart.length > 0) {
+    rows = cart.map((product, index) => {
+      return (
+        <ProductRow
+          updateQuantity={updateQuantity}
+          handleDeleteProduct={handleDeleteProduct}
+          cart={cart}
+          product={product}
+          key={index}
+          index={index}
+        />
+      );
+    });
+  }
+
   return (
     <Stack mb={10} w="100%" justify="space-between">
-      {props.children}
+      {rows}
     </Stack>
   );
 }
 
-function ProductRow() {
+function ProductRow(props) {
+  const {
+    name,
+    color,
+    price,
+    quantity,
+    description,
+    features,
+    image,
+  } = props.product;
+
+  const { handleDeleteProduct } = props;
+
   return (
     <Flex w="100%" py={5} borderBottom="1px" borderColor="gray.300">
       <Flex flex="3">
@@ -68,16 +110,19 @@ function ProductRow() {
           overflow="hidden"
           borderColor="gray.400"
         >
-          <Image boxSize="100px" src={shoe}></Image>
+          <Image boxSize="100px" src={image}></Image>
         </Box>
         <Stack pl={3} justify="center">
-          <Text>The Shoe</Text>
-          <Text color="gray.500">Medium</Text>
+          <Text>{name}</Text>
+          <Text color="gray.500">{color}</Text>
         </Stack>
       </Flex>
 
       <Flex flex="1" align="center">
-        <NumberInput defaultValue="1">
+        <NumberInput
+          defaultValue={quantity}
+          onChange={quantity => props.updateQuantity(quantity, props.index)}
+        >
           <NumberInputField />
           <NumberInputStepper>
             <NumberIncrementStepper />
@@ -89,6 +134,7 @@ function ProductRow() {
         <Center>
           <Center
             as="button"
+            onClick={() => handleDeleteProduct(props.product)}
             _hover={{ background: 'gray.300', color: 'gray.500' }}
             w="40px"
             h="40px"
@@ -100,24 +146,58 @@ function ProductRow() {
         </Center>
       </Flex>
       <Flex flex="1" align="center">
-        <Text>$59</Text>
+        <Text>${price}</Text>
       </Flex>
     </Flex>
   );
 }
 
-function CheckoutItem() {
+function CheckoutTotal(props) {
+  if (props.cart.length > 0) {
+    let prices = props.cart.map(product => product.price * product.quantity);
+    let total = prices.reduce((acc, cur) => acc + cur);
+    return (
+      <Flex
+        mt={2}
+        pt={3}
+        pb={10}
+        borderBottom="1px"
+        borderColor="gray.300"
+        w="100%"
+        justify="space-between"
+      >
+        <Spacer flex="3" />
+        <Flex flex="2" align="center">
+          <Text>Total</Text>
+        </Flex>
+
+        <Flex flex="1" align="center">
+          <HStack>
+            <Flex alignItems="baseline">
+              <Text fontSize="4xl">${total}</Text>
+              <Text pl={2}>USD</Text>
+            </Flex>
+          </HStack>
+        </Flex>
+      </Flex>
+    );
+  } else {
+    return null;
+  }
+}
+
+function CheckoutTable(props) {
   return (
     <div>
-      <HeaderCheckout />
-      <ProductTable>
-        <ProductRow />
-        <ProductRow />
-        <ProductRow />
-        <ProductRow />
-      </ProductTable>
+      <HeaderCheckout cart={props.cart} />
+      <ProductTable
+        handleAddToCart={props.handleAddToCart}
+        handleDeleteProduct={props.handleDeleteProduct}
+        cart={props.cart}
+      ></ProductTable>
+      <CheckoutTotal cart={props.cart} />
     </div>
   );
 }
 
-export default CheckoutItem;
+export default CheckoutTable;
