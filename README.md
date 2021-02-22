@@ -14,10 +14,10 @@ It's practice for the following concepts:
 
 ## Tools
 
-Took some time to learn how Chakra works, its a great framework! Beautiful, and (relatively) easy to use. Documentation is nicely organized and easy to search
+Took some time to learn how Chakra works, its a great framework! Beautiful, and (relatively) easy to use. Documentation is nicely organized and easy to search.
 
 - [Chakra UI](https://chakra-ui.com/)
 
 ## Where can I see it?
 
-[Check it out](https://heyslevin.github.io/shopping-cart/)
+[Check it out!](https://heyslevin.github.io/shopping-cart/)
