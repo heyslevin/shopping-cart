@@ -37,13 +37,24 @@
 
 ## Pseudo Code
 
-- Layout the Home
-  - Navigation
-  - Hero Text
-    - Then Hero Image
-  - Single Product Component
-    - Image
-    - Product Type
-    - Product Name
-    - Price
-  - Footer
+Add Cart Data
+
+- In product
+  - On click to add to cart, setCart([...cart,product])
+  - If product is already in cart
+    - useState to update quantity of product
+- In Cart
+  - let rows = products.map((product,index) => return <rowCode id={index}>)
+  - <Table start> {rows} <Table end>
+- To delete a product
+  - Remove product function on click. removeProduct(id)
+  - products = cart
+  - let filtered = products.filter((product,i) => return i != id)
+  - setCart(filtered)
+- To calculate total
+  - prices = products.map((product=> product.price \* product,quantity))
+  - totalPrice = prices.reduce((acc, current=> return acc + current)
+
+In Header
+
+- counter = cart.length

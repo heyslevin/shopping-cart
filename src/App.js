@@ -1,41 +1,78 @@
-import React from 'react';
-import {
-  ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-  theme,
-} from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
+import React, { useState } from 'react';
+import Home from './pages/Home';
+import ProductPage from './pages/ProductPage';
+import Checkout from './pages/Checkout';
+import AllProducts from './pages/AllProducts';
+import Header from './components/sections/Header';
+import Footer from './components/sections/Footer';
+
+import { BrowserRouter, Switch, Route, Link, Router } from 'react-router-dom';
+import data from './data/data.js';
 
 function App() {
+  const [currentProduct, setCurrentProduct] = useState(data[0]);
+  const [cart, setCart] = useState([]);
+
+  function handleDeleteProduct(product) {
+    let updatedCart = [...cart];
+    if (updatedCart.includes(product)) {
+      let cartWithoutProduct = updatedCart.filter(item => item !== product);
+      setCart(cartWithoutProduct);
+    }
+  }
+
+  function handleAddToCart(product, quantity) {
+    let updatedProduct = product;
+    updatedProduct.quantity = parseInt(quantity);
+    let updatedCart = [...cart];
+
+    if (cart.includes(product)) {
+      let index = updatedCart.indexOf(product);
+      updatedCart[index] = updatedProduct;
+      setCart(updatedCart);
+    } else {
+      setCart([...cart, updatedProduct]);
+    }
+
+    // let updatedProduct = product;
+    // updatedProduct.quantity = parseInt(quantity);
+
+    // if (cart.includes(product)) {
+    //   let cartWithoutProduct = cart.filter(item => item !== product);
+    //   setCart([...cartWithoutProduct, updatedProduct]);
+    // } else {
+    //   setCart([...cart, updatedProduct]);
+    // }
+  }
+
   return (
-    <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            <Logo h="40vmin" pointerEvents="none" />
-            <Text>
-              Edit <Code fontSize="xl">src/App.js</Code> and save to reload.
-            </Text>
-            <Link
-              color="teal.500"
-              href="https://chakra-ui.com"
-              fontSize="2xl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn Chakra
-            </Link>
-          </VStack>
-        </Grid>
-      </Box>
-    </ChakraProvider>
+    <BrowserRouter>
+      <Header cart={cart} />
+
+      <Switch>
+        <Route path="/product">
+          <ProductPage
+            handleAddToCart={handleAddToCart}
+            currentProduct={currentProduct}
+          />
+        </Route>
+        <Route path="/checkout">
+          <Checkout
+            setCart={setCart}
+            cart={cart}
+            handleAddToCart={handleAddToCart}
+            handleDeleteProduct={handleDeleteProduct}
+          />
+        </Route>
+        <Route path="/shopAll">
+          <AllProducts setCurrentProduct={setCurrentProduct} data={data} />
+        </Route>
+        <Route path="/">
+          <Home setCurrentProduct={setCurrentProduct} data={data} />
+        </Route>
+      </Switch>
+      <Footer />
+    </BrowserRouter>
   );
 }
 
