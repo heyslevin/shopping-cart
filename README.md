@@ -10,12 +10,14 @@ It's practice for the following concepts:
 - Router
 - CSS
 - HTML
+- React Frameworks
 
 ## Tools
 
-- Chakra
-- https://www.framer.com/motion/
+Took some time to learn how Chakra works, its a great framework! Beautiful, and (relatively) easy to use. Documentation is nicely organized and easy to search
+
+- [Chakra UI](https://chakra-ui.com/)
 
 ## Where can I see it?
 
-The link will be available here when finished.
+[Check it out](https://heyslevin.github.io/shopping-cart/)
