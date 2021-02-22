@@ -153,34 +153,37 @@ function ProductRow(props) {
 }
 
 function CheckoutTotal(props) {
-  let prices = props.cart.map(product => product.price * product.quantity);
-  let total = prices.reduce((acc, cur) => acc + cur);
+  if (props.cart.length > 0) {
+    let prices = props.cart.map(product => product.price * product.quantity);
+    let total = prices.reduce((acc, cur) => acc + cur);
+    return (
+      <Flex
+        mt={2}
+        pt={3}
+        pb={10}
+        borderBottom="1px"
+        borderColor="gray.300"
+        w="100%"
+        justify="space-between"
+      >
+        <Spacer flex="3" />
+        <Flex flex="2" align="center">
+          <Text>Total</Text>
+        </Flex>
 
-  return (
-    <Flex
-      mt={2}
-      pt={3}
-      pb={10}
-      borderBottom="1px"
-      borderColor="gray.300"
-      w="100%"
-      justify="space-between"
-    >
-      <Spacer flex="3" />
-      <Flex flex="2" align="center">
-        <Text>Total</Text>
+        <Flex flex="1" align="center">
+          <HStack>
+            <Flex alignItems="baseline">
+              <Text fontSize="4xl">${total}</Text>
+              <Text pl={2}>USD</Text>
+            </Flex>
+          </HStack>
+        </Flex>
       </Flex>
-
-      <Flex flex="1" align="center">
-        <HStack>
-          <Flex alignItems="baseline">
-            <Text fontSize="4xl">${total}</Text>
-            <Text pl={2}>USD</Text>
-          </Flex>
-        </HStack>
-      </Flex>
-    </Flex>
-  );
+    );
+  } else {
+    return null;
+  }
 }
 
 function CheckoutTable(props) {
